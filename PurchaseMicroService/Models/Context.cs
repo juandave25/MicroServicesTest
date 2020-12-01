@@ -1,24 +1,23 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PurchaseMicroService.Models
 {
-    public class Context:DbContext
+    public class Context : DbContext
     {
-        public Context() : base("ConnectionString")
-        {
-
-        }
-
+        public Context(DbContextOptions<Context> options): base(options)
+        { }
         public DbSet<Purchase> Purchases { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
         }
     }
 }

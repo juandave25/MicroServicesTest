@@ -44,13 +44,13 @@ namespace PriceMicroservice.Controllers
         }
 
         [HttpGet("currency/{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get(string id)
         {
             try
             {
                 Facade.FacadeService service = new Facade.FacadeService(dollarService, realService);
 
-                if (id > 0)
+                if (string.IsNullOrEmpty(id))
                 {
                     var response = await service.GetPriceByCurrency(id);
                     if (response.Currency != null)

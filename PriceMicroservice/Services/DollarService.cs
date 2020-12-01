@@ -14,6 +14,12 @@ namespace PriceMicroservice.Services
     {
         private readonly string ExternalService;
         private readonly IConfiguration Configuration;
+
+        public DollarService(string Uri)
+        {
+            ExternalService = Uri;
+        }
+
         public DollarService(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -39,6 +45,7 @@ namespace PriceMicroservice.Services
         private DollarPrice MapEntity(List<string> price)
         {
             DollarPrice dollarPrice = new DollarPrice();
+            dollarPrice.Name = "Dollar";
             dollarPrice.Sale =  float.Parse(price[0].ToString());
             dollarPrice.Purchase = float.Parse(price[1].ToString());
             dollarPrice.UpdateDate = price[2].ToString();

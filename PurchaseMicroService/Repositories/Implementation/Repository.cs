@@ -1,16 +1,16 @@
-﻿using PurchaseMicroService.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using PurchaseMicroService.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PurchaseMicroService.Repositories.Implementation
 {
-    public class Repository<T,K> : IRepository<T,K> where T: class where K : class
+    public class Repository<T> : IRepository<T> where T : class
     {
-        private Context Context;
-        private DbSet<T> dbSet;
+        private readonly Context Context;
+        private readonly DbSet<T> dbSet;
 
         public Repository(Context context)
         {
@@ -18,17 +18,11 @@ namespace PurchaseMicroService.Repositories.Implementation
             dbSet = context.Set<T>();
         }
 
-        public async Task<T> Add(K entity)
+        public async Task<T> Add(T entity)
         {
-            var mappedEntity = MapEntity(entity);
-            dbSet.Add(mappedEntity);
+            dbSet.Add(entity);
             await Context.SaveChangesAsync();
-            return mappedEntity;
-        }
-
-        private T MapEntity(K entity)
-        {
-            return (T)Convert.ChangeType(entity, typeof(T));
+            return entity;
         }
     }
 }

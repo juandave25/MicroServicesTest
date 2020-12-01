@@ -10,6 +10,8 @@ namespace PriceMicroservice.Models
     public abstract class PriceCurrency
     {
         [DataMember]
+        public string Name { get; set; }
+        [DataMember]
         public float Sale { get; set; }
         [DataMember]
         public float Purchase { get; set; }

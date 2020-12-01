@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PurchaseMicroService.Models;
-using PurchaseMicroService.Models.Dto;
 using PurchaseMicroService.Repositories;
 
 namespace PurchaseMicroService.Controllers
@@ -16,23 +15,27 @@ namespace PurchaseMicroService.Controllers
     public class PurchaseController : ControllerBase
     {
         private readonly ILogger<PurchaseController> logger;
-        private readonly IRepository<Purchase,PurchaseDto> purchaseRepository;
+        private readonly IRepository<Purchase> purchaseRepository;
 
-        public PurchaseController(ILogger<PurchaseController> Logger, IRepository<Purchase,PurchaseDto> PurchaseRepository)
+        public PurchaseController(ILogger<PurchaseController> Logger, IRepository<Purchase> PurchaseRepository)
         {
             logger = Logger;
             purchaseRepository = PurchaseRepository;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] PurchaseDto purchase)
+        public async Task<IActionResult> Add([FromBody] Purchase purchase)
         {
             try
             {
                 if (purchase != null)
                 {
-                    var response =await purchaseRepository.Add(purchase);
-                    return new ObjectResult(response) { StatusCode = StatusCodes.Status201Created };
+                    Facade.FacadeService service = new Facade.FacadeService(purchaseRepository);
+                    var response =await service.Add(purchase);
+                    if(response != null)
+                    {
+                        return new ObjectResult(response) { StatusCode = StatusCodes.Status201Created };
+                    }
                 }
                 return BadRequest();
             }

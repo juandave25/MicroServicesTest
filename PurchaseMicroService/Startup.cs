@@ -8,11 +8,13 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PurchaseMicroService.Models;
-using PurchaseMicroService.Models.Dto;
 using PurchaseMicroService.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace PurchaseMicroService
 {
@@ -28,8 +30,11 @@ namespace PurchaseMicroService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddDbContext<Context>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+            services.AddScoped(typeof(IRepository<>), typeof(Repositories.Implementation.Repository<>));
             services.AddControllers();
-            services.AddSingleton(typeof(IRepository<,>), typeof(Repositories.Implementation.Repository<,>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

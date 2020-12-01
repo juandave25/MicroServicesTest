@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PriceMicroservice", "PriceM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PurchaseMicroService", "PurchaseMicroService\PurchaseMicroService.csproj", "{4C362E1D-AB94-482F-9A65-823F58064954}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APITesting", "APITesting\APITesting.csproj", "{07789275-7448-407B-B007-48D17F67CE01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4C362E1D-AB94-482F-9A65-823F58064954}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C362E1D-AB94-482F-9A65-823F58064954}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C362E1D-AB94-482F-9A65-823F58064954}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07789275-7448-407B-B007-48D17F67CE01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07789275-7448-407B-B007-48D17F67CE01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07789275-7448-407B-B007-48D17F67CE01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07789275-7448-407B-B007-48D17F67CE01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

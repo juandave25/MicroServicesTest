@@ -13,6 +13,12 @@ namespace PriceMicroservice.Services
     {
         private readonly string ExternalService;
         private readonly IConfiguration Configuration;
+
+        public RealService(string Uri)
+        {
+            ExternalService = Uri;
+        }
+
         public RealService(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -38,6 +44,7 @@ namespace PriceMicroservice.Services
         private RealPrice MapEntity(List<string> price)
         {
             RealPrice realPrice = new RealPrice();
+            realPrice.Name = "Real";
             realPrice.Sale = float.Parse(price[0].ToString())/4;
             realPrice.Purchase = float.Parse(price[1].ToString())/4;
             realPrice.UpdateDate = price[2].ToString();

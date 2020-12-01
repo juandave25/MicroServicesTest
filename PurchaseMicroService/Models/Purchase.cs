@@ -18,6 +18,8 @@ namespace PurchaseMicroService.Models
         public int Amount { get; set; }
         [Required]
         public string Currency { get; set; }
+        [Required]
+        public float CurrencyValue { get; set; }
         public float Price { get; set; }
     }
 }

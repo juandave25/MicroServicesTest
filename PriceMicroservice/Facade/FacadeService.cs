@@ -25,16 +25,16 @@ namespace PriceMicroservice.Facade
             logger = Logger;
         }
 
-        public async Task<PriceCurrencyDto> GetPriceByCurrency(int currency)
+        public async Task<PriceCurrencyDto> GetPriceByCurrency(string currency)
         {
             var response = new PriceCurrencyDto();
             response.Message = "Ok";
             switch (currency)
             {
-                case (int)Enum.Currency.dollar:
+                case "Dollar":
                     response.Currency = await dollarService.GetPrice();
                     break;
-                case (int)Enum.Currency.real:
+                case "Real":
                     response.Currency = await realService.GetPrice();
                     break;
                 default:

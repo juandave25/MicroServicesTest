@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace PurchaseMicroService.Repositories
 {
-    public interface IRepository<T, K> where T : class where K : class
+    public interface IRepository<T> where T : class
     {
-        public Task<T> Add(K entity);
+        public Task<T> Add(T entity);
     }
 }
